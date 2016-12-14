@@ -59,15 +59,11 @@ var deltay = 0;
 // Update game objects
 var update = function (modifier) {
 	
-    document.getElementById("up").onmouseover = function(){deltay = -modifier;};
-    document.getElementById("down").onmouseover = function(){deltay = modifier;};
-    document.getElementById("left").onmouseover = function(){deltax = -modifier;};
-    document.getElementById("right").onmouseover = function(){deltax = modifier;};
+    document.getElementById("up").onclick = function(){deltax = 0;deltay = -modifier;};
+    document.getElementById("down").onclick = function(){deltax = 0;deltay = modifier;};
+    document.getElementById("left").onclick = function(){deltay = 0;deltax = -modifier;};
+    document.getElementById("right").onclick = function(){deltay = 0;deltax = modifier;};
 	
-	document.getElementById("up").onmouseout = function(){deltay = 0;};
-    document.getElementById("down").onmouseout = function(){deltay = 0;};
-    document.getElementById("left").onmouseout = function(){deltax = 0;};
-    document.getElementById("right").onmouseout = function(){deltax = 0;};
 	
 	hero.x += hero.speed*deltax;
 	hero.y += hero.speed*deltay;
