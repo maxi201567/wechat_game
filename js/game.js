@@ -35,25 +35,43 @@ var hero = {
 };
 var monster = {};
 var monstersCaught = 0;
-
+hero.x = canvas.width/2;
+hero.y = canvas.height/2;
 
 // Reset the game when the player catches a monster
 var reset = function () {
-	hero.x = canvas.width/2;
-    hero.y = canvas.height/2;
+
 	// Throw the monster somewhere on the screen randomly
 	monster.x = 32 + (Math.random() * (canvas.width - 64));
 	monster.y = 32 + (Math.random() * (canvas.height - 64));
+	
+	if(monster.y > canvas.height-64)monster.y = canvas.height-64;
+	if(monster.y < 32)monster.y = 32;
+	if(monster.x > canvas.width-64)monster.x = canvas.width-64;
+	if(monster.x < 32)monster.x = 32;
 };
 
+var deltax = 0;
+var deltay = 0;
 // Update game objects
 var update = function (modifier) {
-	document.getElementById("up").onclick = function(){hero.y -= hero.speed * modifier;};
-    document.getElementById("down").onclick = function(){hero.y += hero.speed * modifier;};
-	document.getElementById("left").onclick = function(){hero.x -= hero.speed * modifier;};
-	document.getElementById("right").onclick = function(){hero.x += hero.speed * modifier;};
+	document.getElementById("up").onmousedown = function(){deltay = -modifier;};
+    document.getElementById("down").onmousedown = function(){deltay = modifier;};
+	document.getElementById("left").onmousedown = function(){deltax = -modifier;};
+	document.getElementById("right").onmousedown = function(){deltax = modifier;};
+	
+	document.getElementById("up").onmouseup = function(){deltay = 0;};
+    document.getElementById("down").onmouseup = function(){deltay = 0;};
+	document.getElementById("left").onmouseup = function(){deltax = 0;};
+	document.getElementById("right").onmouseup = function(){deltax = 0;};
 
-
+    hero.y += hero.speed * deltay;
+	hero.x += hero.speed * deltax;
+	
+	if(hero.y > canvas.height-64)hero.y = canvas.height-64;
+	if(hero.y < 32)hero.y = 32;
+	if(hero.x > canvas.width-64)hero.x = canvas.width-64;
+	if(hero.x < 32)hero.x = 32;
 	// Are they touching?
 	if (
 		hero.x <= (monster.x + 32)
