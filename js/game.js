@@ -3,7 +3,7 @@ var canvas = document.createElement("canvas");
 var ctx = canvas.getContext("2d");
 canvas.width = 512;
 canvas.height = 480;
-document.body.appendChild(canvas);
+document.getElementById("canvas").appendChild(canvas);
 
 // Background image
 var bgReady = false;
@@ -41,6 +41,7 @@ hero.y = canvas.height/2;
 // Reset the game when the player catches a monster
 var reset = function () {
 
+
 	// Throw the monster somewhere on the screen randomly
 	monster.x = 32 + (Math.random() * (canvas.width - 64));
 	monster.y = 32 + (Math.random() * (canvas.height - 64));
@@ -53,13 +54,24 @@ var reset = function () {
 
 var deltax = 0;
 var deltay = 0;
+
+
 // Update game objects
 var update = function (modifier) {
-	document.getElementById("up").onclick = function(){hero.y -= hero.speed * modifier;};
-    document.getElementById("down").onclick = function(){hero.y += hero.speed * modifier;};
-	document.getElementById("left").onclick = function(){hero.x -= hero.speed * modifier;};
-	document.getElementById("right").onclick = function(){hero.x += hero.speed * modifier;};
-
+	
+    document.getElementById("up").onmouseover = function(){deltay = -modifier;};
+    document.getElementById("down").onmouseover = function(){deltay = modifier;};
+    document.getElementById("left").onmouseover = function(){deltax = -modifier;};
+    document.getElementById("right").onmouseover = function(){deltax = modifier;};
+	
+	document.getElementById("up").onmouseout = function(){deltay = 0;};
+    document.getElementById("down").onmouseout = function(){deltay = 0;};
+    document.getElementById("left").onmouseout = function(){deltax = 0;};
+    document.getElementById("right").onmouseout = function(){deltax = 0;};
+	
+	hero.x += hero.speed*deltax;
+	hero.y += hero.speed*deltay;
+	
 	if(hero.y > canvas.height-64)hero.y = canvas.height-64;
 	if(hero.y < 32)hero.y = 32;
 	if(hero.x > canvas.width-64)hero.x = canvas.width-64;
