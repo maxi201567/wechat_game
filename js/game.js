@@ -60,6 +60,11 @@ var update = function (modifier) {
 	document.getElementById("left").onmousedown = function(){deltax = -modifier;};
 	document.getElementById("right").onmousedown = function(){deltax = modifier;};
 	
+	document.getElementById("up").onmouseout = function(){deltay = 0;};
+    document.getElementById("down").onmouseout = function(){deltay = 0;};
+	document.getElementById("left").onmouseout = function(){deltax = 0;};
+	document.getElementById("right").onmouseout = function(){deltax = 0;};
+	
 	document.getElementById("up").onmouseup = function(){deltay = 0;};
     document.getElementById("down").onmouseup = function(){deltay = 0;};
 	document.getElementById("left").onmouseup = function(){deltax = 0;};
