@@ -55,24 +55,11 @@ var deltax = 0;
 var deltay = 0;
 // Update game objects
 var update = function (modifier) {
-	document.getElementById("up").onmousedown = function(){deltay = -modifier;};
-    document.getElementById("down").onmousedown = function(){deltay = modifier;};
-	document.getElementById("left").onmousedown = function(){deltax = -modifier;};
-	document.getElementById("right").onmousedown = function(){deltax = modifier;};
-	
-	document.getElementById("up").onmouseout = function(){deltay = 0;};
-    document.getElementById("down").onmouseout = function(){deltay = 0;};
-	document.getElementById("left").onmouseout = function(){deltax = 0;};
-	document.getElementById("right").onmouseout = function(){deltax = 0;};
-	
-	document.getElementById("up").onmouseup = function(){deltay = 0;};
-    document.getElementById("down").onmouseup = function(){deltay = 0;};
-	document.getElementById("left").onmouseup = function(){deltax = 0;};
-	document.getElementById("right").onmouseup = function(){deltax = 0;};
+	document.getElementById("up").onclick = function(){hero.y -= hero.speed * modifier;};
+    document.getElementById("down").onclick = function(){hero.y += hero.speed * modifier;};
+	document.getElementById("left").onclick = function(){hero.x -= hero.speed * modifier;};
+	document.getElementById("right").onclick = function(){hero.x += hero.speed * modifier;};
 
-    hero.y += hero.speed * deltay;
-	hero.x += hero.speed * deltax;
-	
 	if(hero.y > canvas.height-64)hero.y = canvas.height-64;
 	if(hero.y < 32)hero.y = 32;
 	if(hero.x > canvas.width-64)hero.x = canvas.width-64;
